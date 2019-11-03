@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class appCoreTryTwo {
 
     private SpecInterface dropBoxObj;
-    
+
     public static void main(String[] args) {
         new appCoreTryTwo().runApp();
     }
@@ -47,6 +47,7 @@ public class appCoreTryTwo {
             for(int i = 0; i < hash.length; i++){
                 password += (char)hash[i];
             }
+            password = password.replaceAll("\\n", "");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -62,8 +63,22 @@ public class appCoreTryTwo {
             consoleRead = s.nextLine();
 
             if(consoleRead.equals("comm")) {
-                System.out.println("1 - logout \n2 - makeFile \n3 - deleteFile \n4 - makeUser\n5 - givePermission");
+                System.out.println("1 - logout \n2 - makeFile \n3 " +                          // Lists all functions
+                        "- deleteFile \n4 - makeUser\n5 - givePermission");
             }
+            if(consoleRead.equals("1")) {
+                break;                                                                         // Basically stops the program
+            }
+            if(consoleRead.equals("4")) {
+                System.out.println("Enter new username for new user.");
+                consoleRead = s.nextLine();
+                while(!dropBoxObj.createUser(consoleRead)){                                    // Loops until valid username is entered
+                    System.out.println("User already exists, please choose another username.");
+                    consoleRead = s.nextLine();
+                }
+            }
+
+
         }
     }
 }
