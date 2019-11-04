@@ -21,13 +21,13 @@ public class appCoreTryTwo {
         dropBoxObj = new DropBoxCore();
         //
         Scanner s = new Scanner(System.in);
-        String currParh;
+        String currPath;
         String username;
         String password;
         do{
             System.out.println("Enter root file name.");
-            currParh = s.nextLine();
-        }while (!dropBoxObj.create(currParh));
+            currPath = s.nextLine();
+        }while (!dropBoxObj.create(currPath));
 
         do{
             System.out.println("Success. Now enter username.");
@@ -52,7 +52,7 @@ public class appCoreTryTwo {
             e.printStackTrace();
         }
 
-        dropBoxObj.logIn(username, password, currParh);
+        dropBoxObj.logIn(username, password, currPath);
 
         System.out.println("Enter 'comm' to list all comands.");
 
@@ -76,6 +76,11 @@ public class appCoreTryTwo {
                     System.out.println("User already exists, please choose another username.");
                     consoleRead = s.nextLine();
                 }
+            }
+            if(consoleRead.equals("5")){
+                System.out.println("Enter username of user whose credentials you want to change.");
+                consoleRead = s.nextLine();
+                dropBoxObj.changeUserCredentials(consoleRead);
             }
 
 
