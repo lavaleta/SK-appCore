@@ -54,11 +54,11 @@ public class appCoreTryTwo {
 
         dropBoxObj.logIn(username, password, currPath);
 
-        System.out.println("Enter 'comm' to list all comands.");
-
-        String consoleRead;
 
         while(true){
+            System.out.println("\nEnter 'comm' to list all comands.");
+
+            String consoleRead;
 
             consoleRead = s.nextLine();
 
@@ -81,6 +81,21 @@ public class appCoreTryTwo {
                 System.out.println("Enter username of user whose credentials you want to change.");
                 consoleRead = s.nextLine();
                 dropBoxObj.changeUserCredentials(consoleRead);
+            }
+
+            if(consoleRead.equals("2")){
+                System.out.println("Enter the name of the file");
+                consoleRead = s.nextLine();
+
+                dropBoxObj.addFile(consoleRead,true );
+
+            }
+            if(consoleRead.equals("3")){
+
+                consoleRead = s.nextLine();
+
+                dropBoxObj.removeFile();
+
             }
 
 
