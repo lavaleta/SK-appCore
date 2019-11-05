@@ -65,7 +65,7 @@ public class appCoreTryTwo {
             if(consoleRead.equals("comm")) {
                 System.out.println("1 - logout \n2 - makeFile \n3 " +                          // Lists all functions
                         "- deleteFile \n4 - makeUser\n5 - givePermission" +
-                        "\n 6 - searchFile");
+                        "\n 6 - searchFile\n7 - forbidExtension");
             }
             if(consoleRead.equals("1")) {
                 break;                                                                         // Basically stops the program
@@ -103,6 +103,13 @@ public class appCoreTryTwo {
                 consoleRead = s.nextLine();
 
                 dropBoxObj.searchFiles(consoleRead);
+            }
+            if(consoleRead.equals("6")){
+                System.out.println("Enter extension to be forbidden");
+
+                consoleRead = s.nextLine();
+
+                dropBoxObj.forbidExtension(consoleRead);
             }
         }
     }
