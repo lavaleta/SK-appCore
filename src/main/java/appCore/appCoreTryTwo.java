@@ -64,7 +64,8 @@ public class appCoreTryTwo {
 
             if(consoleRead.equals("comm")) {
                 System.out.println("1 - logout \n2 - makeFile \n3 " +                          // Lists all functions
-                        "- deleteFile \n4 - makeUser\n5 - givePermission");
+                        "- deleteFile \n4 - makeUser\n5 - givePermission" +
+                        "\n 6 - searchFile");
             }
             if(consoleRead.equals("1")) {
                 break;                                                                         // Basically stops the program
@@ -92,10 +93,16 @@ public class appCoreTryTwo {
             }
             if(consoleRead.equals("3")){
 
-                consoleRead = s.nextLine();
-
+                System.out.println("Current file will be deleted");
                 dropBoxObj.removeFile();
 
+            }
+            if(consoleRead.equals("6")){
+                System.out.println("Enter the name of the file");
+
+                consoleRead = s.nextLine();
+
+                dropBoxObj.searchFiles(consoleRead);
             }
 
 
