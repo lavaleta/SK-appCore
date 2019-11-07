@@ -29,7 +29,7 @@ public class appCoreTryTwo {
         do{
             System.out.println("Enter root file name.");
             currPath = s.nextLine();
-        }while (!dropBoxObj.create(currPath));
+        }while (currPath.isEmpty());
 
         do{
             System.out.println("Success. Now enter username.");
@@ -54,11 +54,11 @@ public class appCoreTryTwo {
             e.printStackTrace();
         }
 
-        dropBoxObj.logIn(username, password, currPath);
+        if(dropBoxObj.logIn(username, password, currPath) == -1) return;
 
 
         while(true){
-            System.out.println("\nEnter 'comm' to list all comands.");
+            System.out.println("Enter 'comm' to list all comands.");
 
             String consoleRead;
 
@@ -67,11 +67,12 @@ public class appCoreTryTwo {
             if(consoleRead.equals("comm")) {
                 System.out.println("1 - logout \n2 - makeFile \n3 " +                          // Lists all functions
                         "- deleteFile \n4 - makeUser\n5 - givePermission" +
-                        "\n6 - searchFile + \n7 - Zip and upload + \n8 - Download folder as zip  "+
-                        "\n9 - forbidExtension" );
+                        "\n6 - searchFile  \n7 - Zip and upload \n8 - Download folder as zip  "+
+                        "\n9 - forbidExtension + \n10 - rename" );
             }
             if(consoleRead.equals("1")) {
-                break;                                                                         // Basically stops the program
+                dropBoxObj.logOut();    // Basically stops the program and deletes the local copy if file
+                break;
             }
             if(consoleRead.equals("2")){
                 System.out.println("Enter the name of the file. NOTE IF you wish to make multiple files enter: fileName (10). This will make 10 files [fileName0,...,fileName10].");
@@ -114,7 +115,7 @@ public class appCoreTryTwo {
 
                 consoleRead = s.nextLine();
 
-                dropBoxObj.searchFiles(consoleRead);
+                dropBoxObj.downloadZIP(consoleRead, "");
             }
             if(consoleRead.equals("9")){
                 System.out.println("Enter extension to be forbidden");
@@ -122,6 +123,14 @@ public class appCoreTryTwo {
                 consoleRead = s.nextLine();
 
                 dropBoxObj.forbidExtension(consoleRead);
+            }
+            if(consoleRead.equals("10")){
+                System.out.println("Enter file you want to rename");
+                String tmp;
+                consoleRead = s.nextLine();
+                System.out.println("Enter new file name");
+                tmp = s.nextLine();
+                dropBoxObj.rename(consoleRead, tmp);
             }
         }
     }
