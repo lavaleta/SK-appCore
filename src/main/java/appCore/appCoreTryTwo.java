@@ -2,6 +2,7 @@ package appCore;
 
 import dropBoxPackage.DropBoxCore;
 import interfacePac.SpecInterface;
+import localStoragePackage.LocalStorageCore;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -18,7 +19,8 @@ public class appCoreTryTwo {
 
     private void runApp(){
         //
-        dropBoxObj = new DropBoxCore();
+        dropBoxObj = new LocalStorageCore();
+        //dropBoxObj = new DropBoxCore();
         //
         Scanner s = new Scanner(System.in);
         String currPath;
@@ -65,11 +67,24 @@ public class appCoreTryTwo {
             if(consoleRead.equals("comm")) {
                 System.out.println("1 - logout \n2 - makeFile \n3 " +                          // Lists all functions
                         "- deleteFile \n4 - makeUser\n5 - givePermission" +
-                        "\n6 - searchFile + \n7 - Zipuj i uploaduj + \n8 - Skini folder  "+
+                        "\n6 - searchFile + \n7 - Zip and upload + \n8 - Download folder as zip  "+
                         "\n9 - forbidExtension" );
             }
             if(consoleRead.equals("1")) {
                 break;                                                                         // Basically stops the program
+            }
+            if(consoleRead.equals("2")){
+                System.out.println("Enter the name of the file. NOTE IF you wish to make multiple files enter: fileName (10). This will make 10 files [fileName0,...,fileName10].");
+                consoleRead = s.nextLine();
+
+                dropBoxObj.addFile(consoleRead,true );
+            }
+            if(consoleRead.equals("3")){
+                System.out.println("Enter name of the file you wish to delete.");
+                consoleRead = s.nextLine();
+
+                dropBoxObj.removeFile(consoleRead);
+
             }
             if(consoleRead.equals("4")) {
                 System.out.println("Enter new username for new user.");
@@ -84,22 +99,18 @@ public class appCoreTryTwo {
                 consoleRead = s.nextLine();
                 dropBoxObj.changeUserCredentials(consoleRead);
             }
-
-            if(consoleRead.equals("2")){
-                System.out.println("Enter the name of the file");
-                consoleRead = s.nextLine();
-
-                dropBoxObj.addFile(consoleRead,true );
-
-            }
-            if(consoleRead.equals("3")){
-
-                System.out.println("Current file will be deleted");
-                dropBoxObj.removeFile();
-
-            }
             if(consoleRead.equals("6")){
                 System.out.println("Enter the name of the file");
+
+                consoleRead = s.nextLine();
+
+                dropBoxObj.searchFiles(consoleRead);
+            }
+            if(consoleRead.equals("7")){
+                //// TODO: 07-Nov-19 Potrebno je implementirati...
+            }
+            if(consoleRead.equals("8")){
+                System.out.println("Enter the names of files you want zipped i the next format: file1,file2,file3,...,fileN");
 
                 consoleRead = s.nextLine();
 
