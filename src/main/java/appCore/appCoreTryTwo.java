@@ -19,8 +19,8 @@ public class appCoreTryTwo {
 
     private void runApp(){
         //
-        dropBoxObj = new LocalStorageCore();
-        //dropBoxObj = new DropBoxCore();
+        //dropBoxObj = new LocalStorageCore();
+        dropBoxObj = new DropBoxCore();
         //
         Scanner s = new Scanner(System.in);
         String currPath;
@@ -67,18 +67,27 @@ public class appCoreTryTwo {
             if(consoleRead.equals("comm")) {
                 System.out.println("1 - logout \n2 - makeFile \n3 " +                          // Lists all functions
                         "- deleteFile \n4 - makeUser\n5 - givePermission" +
-                        "\n6 - searchFile  \n7 - Zip and upload \n8 - Download folder as zip  "+
-                        "\n9 - forbidExtension + \n10 - rename" );
+                        "\n6 - searchFile  \n7 - Zip and upload \n8 - Download files as zip  "+
+                        "\n9 - forbidExtension + \n10 - rename" + "\n11 - metadata" );
             }
             if(consoleRead.equals("1")) {
                 dropBoxObj.logOut();    // Basically stops the program and deletes the local copy if file
                 break;
             }
             if(consoleRead.equals("2")){
-                System.out.println("Enter the name of the file. NOTE IF you wish to make multiple files enter: fileName (10). This will make 10 files [fileName0,...,fileName10].");
-                consoleRead = s.nextLine();
 
-                dropBoxObj.addFile(consoleRead,true );
+                while(true) {
+                    try {
+                        System.out.println("Enter the name of the file. NOTE IF you wish to make multiple files enter: (10) fileName . This will make 10 files [fileName0,...,fileName10].");
+                        consoleRead = s.nextLine();
+                        dropBoxObj.addFile(consoleRead, true);
+                        break;
+                    }catch (NumberFormatException e){
+                        System.out.println("Invalid interval annotation");
+                        continue;
+                    }
+                }
+
             }
             if(consoleRead.equals("3")){
                 System.out.println("Enter name of the file you wish to delete.");
@@ -108,7 +117,12 @@ public class appCoreTryTwo {
                 dropBoxObj.searchFiles(consoleRead);
             }
             if(consoleRead.equals("7")){
-                //// TODO: 07-Nov-19 Potrebno je implementirati...
+                System.out.println("Enter the names of the files you want zipped and uploaded: \"file1\" \"file2\"... ");
+
+                consoleRead = s.nextLine();
+
+
+               dropBoxObj.uploadZIP(consoleRead);
             }
             if(consoleRead.equals("8")){
                 System.out.println("Enter the names of files you want zipped i the next format: file1,file2,file3,...,fileN");
@@ -131,6 +145,46 @@ public class appCoreTryTwo {
                 System.out.println("Enter new file name");
                 tmp = s.nextLine();
                 dropBoxObj.rename(consoleRead, tmp);
+            }
+            if(consoleRead.equals("11")){
+
+                System.out.println("Do you want to load metadata from json file or no? <Yes/No>");
+                consoleRead = s.nextLine();
+                boolean yesno = true;
+                while(yesno){
+
+                    if(consoleRead.toLowerCase().equals("yes")){
+                        System.out.println("Enter the name of the file");
+                        consoleRead = s.nextLine();
+
+                        dropBoxObj.setMetadata("-f "+ consoleRead);
+
+
+                        yesno = false;
+                    }
+                    else if(consoleRead.toLowerCase().equals("no")){
+                        System.out.println("Enter the key value: ");
+                        consoleRead = s.nextLine();
+                        String keyValue = consoleRead;
+                        keyValue += ":";
+
+                        System.out.println("Enter the value of value");
+
+                        consoleRead = s.nextLine();
+                        keyValue += consoleRead;
+                        dropBoxObj.setMetadata(keyValue);
+
+                        yesno = false;
+                    }
+                    else{
+                        continue;
+                    }
+
+
+                }
+
+
+
             }
         }
     }
