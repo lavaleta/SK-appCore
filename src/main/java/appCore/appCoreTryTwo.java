@@ -58,14 +58,14 @@ public class appCoreTryTwo {
 
 
         while(true){
-            System.out.println("Enter 'comm' to list all comands.");
+            System.out.println("Enter 'help' to list all comands.");
 
             String consoleRead;
 
             consoleRead = s.nextLine();
 
-            if(consoleRead.equals("comm")) {
-                System.out.println("1 - logout \n2 - makeFile \n3 " +                          // Lists all functions
+            if(consoleRead.toLowerCase().equals("help")) {
+                System.out.println("1 - Logout and close \n2 - makeFile \n3 " +                          // Lists all functions
                         "- deleteFile \n4 - makeUser\n5 - givePermission" +
                         "\n6 - searchFile  \n7 - Zip and upload \n8 - Download files as zip  "+
                         "\n9 - forbidExtension + \n10 - rename" + "\n11 - metadata" );
@@ -179,12 +179,7 @@ public class appCoreTryTwo {
                     else{
                         continue;
                     }
-
-
                 }
-
-
-
             }
         }
     }
