@@ -19,8 +19,8 @@ public class appCoreTryTwo {
 
     private void runApp(){
         //
-        //dropBoxObj = new LocalStorageCore();
-        dropBoxObj = new DropBoxCore();
+        dropBoxObj = new LocalStorageCore();
+        //dropBoxObj = new DropBoxCore();
         //
         Scanner s = new Scanner(System.in);
         String currPath;
@@ -65,10 +65,10 @@ public class appCoreTryTwo {
             consoleRead = s.nextLine();
 
             if(consoleRead.toLowerCase().equals("help")) {
-                System.out.println("1 - Logout and close \n2 - makeFile \n3 " +                          // Lists all functions
-                        "- deleteFile \n4 - makeUser\n5 - givePermission" +
-                        "\n6 - searchFile  \n7 - Zip and upload \n8 - Download files as zip  "+
-                        "\n9 - forbidExtension + \n10 - rename" + "\n11 - metadata" );
+                System.out.println("1 - Logout and close  \n2 - Make new file  \n3 - Delete file  " +                          // Lists all functions
+                        "\n4 - Add new user\n5 - Change user permission" +
+                        "\n6 - Search file  \n7 - Zip and upload \n8 - Download files as zip  "+
+                        "\n9 - Manage forbidden extensions   + \n10 - Rename file" + "\n11 - Manage metadata" );
             }
             if(consoleRead.equals("1")) {
                 dropBoxObj.logOut();    // Basically stops the program and deletes the local copy if file
